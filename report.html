@@ -4,18 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#14213d">
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" href="./style.css">
   <title>Yoklama Raporları</title>
 </head>
 <body data-page="report">
   <header>
-    <h1>Yoklama Raporları</h1>
+    <h1>Haftalık Yoklama Raporu</h1>
     <nav>
-      <a href="lecturer.html">Hoca</a>
-      <a href="student.html">Öğrenci</a>
-      <a href="report.html">Raporlar</a>
+      <a href="./lecturer.html">Hoca</a>
+      <a href="./student.html">Öğrenci</a>
+      <a href="./report.html">Raporlar</a>
     </nav>
   </header>
 
@@ -27,20 +26,18 @@
       <p id="reportSummary"></p>
     </section>
 
-    <section class="card">
-      <div class="table-wrap">
-        <table>
-          <thead id="reportHead"></thead>
-          <tbody id="reportBody"></tbody>
-        </table>
-      </div>
+    <section class="card table-wrap">
+      <table>
+        <thead id="reportHead"></thead>
+        <tbody id="reportBody"></tbody>
+      </table>
     </section>
   </main>
 
-  <script src="app.js"></script>
+  <script src="./app.js"></script>
   <script>
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("sw.js").catch(console.error);
+      navigator.serviceWorker.register("./sw.js").catch(console.error);
     }
   </script>
 </body>
