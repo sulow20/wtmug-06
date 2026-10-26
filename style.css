@@ -1,24 +1,48 @@
 
+* {
+  box-sizing: border-box;
+}
+
 :root {
   font-family: system-ui, Arial, sans-serif;
   color: #172033;
   background: #f1f5f9;
 }
-* { box-sizing: border-box; }
-body { margin: 0; min-height: 100vh; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
 
 header {
   background: #14213d;
   color: white;
   padding: 20px;
 }
-header h1 { margin: 0 0 12px; font-size: 1.45rem; }
-header p { margin-bottom: 0; }
 
-nav { display: flex; gap: 16px; flex-wrap: wrap; }
-nav a { color: white; text-decoration: none; font-weight: 600; }
+header h1 {
+  font-size: 1.45rem;
+  margin-top: 0;
+}
 
-main { max-width: 1000px; margin: auto; padding: 16px; }
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+main {
+  max-width: 1000px;
+  margin: auto;
+  padding: 16px;
+}
+
 .card {
   background: white;
   border-radius: 14px;
@@ -26,10 +50,19 @@ main { max-width: 1000px; margin: auto; padding: 16px; }
   margin-bottom: 16px;
   box-shadow: 0 3px 14px #17203312;
 }
-h2 { font-size: 1.15rem; }
 
-label { display: block; margin: 14px 0 6px; font-weight: 600; }
-input:not([type=checkbox]), select {
+h2 {
+  font-size: 1.15rem;
+}
+
+label {
+  display: block;
+  margin: 14px 0 6px;
+  font-weight: 600;
+}
+
+input:not([type="checkbox"]),
+select {
   display: block;
   width: 100%;
   min-height: 44px;
@@ -39,12 +72,14 @@ input:not([type=checkbox]), select {
   background: white;
   font: inherit;
 }
-button, .big-link {
+
+button,
+.big-link {
   display: block;
   width: 100%;
   min-height: 44px;
   margin-top: 12px;
-  padding: 11px 16px;
+  padding: 12px 16px;
   border: 0;
   border-radius: 8px;
   background: #2563eb;
@@ -55,10 +90,20 @@ button, .big-link {
   text-decoration: none;
   cursor: pointer;
 }
-button.secondary { background: #475569; }
-button:disabled { opacity: .5; cursor: not-allowed; }
 
-.big-link { padding: 15px; }
+button.secondary {
+  background: #475569;
+}
+
+button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.big-link {
+  padding: 15px;
+}
+
 .code {
   text-align: center;
   color: #2563eb;
@@ -67,43 +112,77 @@ button:disabled { opacity: .5; cursor: not-allowed; }
   letter-spacing: .15em;
   padding: 14px 0;
 }
-.check { display: flex; align-items: center; gap: 10px; }
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 video {
-  display: block;
   width: 100%;
   max-height: 55vh;
   background: #0f172a;
   border-radius: 10px;
-  margin-top: 12px;
 }
+
 #qr {
   display: flex;
   justify-content: center;
-  padding: 12px;
+  align-items: center;
   min-height: 40px;
+  padding: 12px;
   overflow: auto;
 }
-#qr img, #qr canvas { max-width: 100%; height: auto; }
-.table-wrap { overflow-x: auto; }
-table { border-collapse: collapse; width: 100%; font-size: .9rem; }
-th, td {
+
+#qr img,
+#qr canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: .9rem;
+}
+
+th,
+td {
   border: 1px solid #cbd5e1;
   padding: 9px;
   text-align: center;
   white-space: nowrap;
 }
-th { background: #e2e8f0; }
-td:first-child, th:first-child {
-  position: sticky;
-  left: 0;
-  background: #f8fafc;
-  text-align: left;
+
+th {
+  background: #e2e8f0;
 }
-.success { color: #15803d; font-weight: 700; }
-.error { color: #b91c1c; font-weight: 700; }
+
+.success {
+  color: #15803d;
+  font-weight: 700;
+}
+
+.error {
+  color: #b91c1c;
+  font-weight: 700;
+}
 
 @media (max-width: 600px) {
-  header { padding: 16px; }
-  main { padding: 10px; }
-  .card { padding: 15px; }
+  header {
+    padding: 16px;
+  }
+
+  main {
+    padding: 10px;
+  }
+
+  .card {
+    padding: 15px;
+  }
 }
