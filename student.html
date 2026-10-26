@@ -7,57 +7,151 @@
   <meta name="theme-color" content="#14213d">
   <link rel="manifest" href="./manifest.json">
   <link rel="stylesheet" href="./style.css">
-  <title>Öğrenci Uygulaması</title>
+  <title>Öğrenci Yoklama Sistemi</title>
 </head>
-<body data-page="student">
+<body>
   <header>
-    <h1>Öğrenci Yoklama</h1>
+    <h1>Öğrenci Yoklama Sistemi</h1>
     <nav>
       <a href="./lecturer.html">Hoca</a>
       <a href="./student.html">Öğrenci</a>
+      <a href="./report.html">Raporlar</a>
     </nav>
   </header>
 
   <main>
     <section class="card">
-      <h2>Öğrenci bilgisi</h2>
+      <h2>Öğrenci bilgileri</h2>
+
       <label for="studentId">Öğrenci numarası</label>
       <input id="studentId" inputmode="numeric"
              autocomplete="off" placeholder="2024001">
 
-      <button id="startListening">Mikrofonu başlat</button>
-      <button id="stopListening" class="secondary" disabled>
+      <button type="button" id="startListening">
+        Mikrofonu başlat
+      </button>
+
+      <button type="button" id="stopListening" class="secondary">
         Dinlemeyi durdur
       </button>
-      <p id="listenStatus" role="status">Mikrofon kapalı.</p>
+
+      <p id="listenStatus">Mikrofon henüz başlatılmadı.</p>
+    </section>
+
+    <section class="card">
+      <h2>Manuel kod girişi</h2>
+
+      <label for="manualCode">Hocanın ekranındaki dört haneli kod</label>
+      <input id="manualCode"
+             inputmode="numeric"
+             maxlength="4"
+             placeholder="Örnek: 1234">
+
+      <button type="button" id="testQR">
+        QR OLUŞTUR
+      </button>
+
+      <p id="qrStatus" role="status">Dört haneli kod bekleniyor.</p>
     </section>
 
     <section class="card">
       <h2>Algılanan kod</h2>
       <div id="studentCode" class="code">----</div>
-      <p id="codeStatus" role="status">Dört haneli kod bekleniyor.</p>
-    </section>
-
-    <section class="card">
-      <h2>Manuel kod girişi</h2>
-      <label for="manualCode">Hocanın ekranındaki kod</label>
-      <input id="manualCode" inputmode="numeric"
-             maxlength="4" placeholder="1234">
-      <button id="submitManual">QR kodunu oluştur</button>
+      <p id="codeStatus">Henüz kod algılanmadı.</p>
     </section>
 
     <section class="card">
       <h2>Yoklama QR kodu</h2>
       <div id="qr"></div>
-      <p>QR kodunu hocanın kamerasına göster.</p>
+      <p>Oluşan QR kodunu hocanın telefonuna göster.</p>
     </section>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <!-- QR kütüphanesi -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <!-- QR üretimi app.js dosyasından bağımsızdır. -->
+  <script>
+    (() => {
+      const $ = id => document.getElementById(id);
+
+      function generateQR() {
+        const studentId = $("studentId").value.trim();
+        const code = $("manualCode").value.trim();
+        const box = $("qr");
+        const status = $("qrStatus");
+
+        if (!studentId) {
+          status.textContent = "Önce öğrenci numaranı gir.";
+          return;
+        }
+
+        if (!/^\d{4}$/.test(code)) {
+          status.textContent = "Kod tam olarak dört rakam olmalıdır.";
+          return;
+        }
+
+        if (typeof window.QRCode === "undefined") {
+          status.textContent =
+            "QR kütüphanesi yüklenemedi. İnternet bağlantısını kontrol et.";
+          return;
+        }
+
+        box.replaceChildren();
+
+        try {
+          new window.QRCode(box, {
+            text: JSON.stringify({
+              studentId: studentId,
+              code: code
+            }),
+            width: 240,
+            height: 240,
+            correctLevel: window.QRCode.CorrectLevel.L
+          });
+
+          $("studentCode").textContent = code;
+          $("codeStatus").textContent = "QR kodu hazır.";
+          status.textContent = "QR kodu başarıyla oluşturuldu.";
+
+          try {
+            localStorage.setItem("wtmug-student-id", studentId);
+          } catch (_) {}
+        } catch (error) {
+          status.textContent = "QR oluşturma hatası: " + error.message;
+        }
+      }
+
+      $("testQR").addEventListener("click", generateQR);
+
+      $("manualCode").addEventListener("keydown", event => {
+        if (event.key === "Enter") generateQR();
+      });
+
+      $("studentId").value = (() => {
+        try {
+          return localStorage.getItem("wtmug-student-id") || "";
+        } catch (_) {
+          return "";
+        }
+      })();
+
+      // QR kütüphanesi yüklenmezse sorunu ekranda göster.
+      window.addEventListener("load", () => {
+        if (typeof window.QRCode === "undefined") {
+          $("qrStatus").textContent =
+            "QR kütüphanesi yüklenmedi. İnternet bağlantını kontrol et.";
+        }
+      });
+    })();
+  </script>
+
+  <!-- Ses dinleme kodu QR üretiminden bağımsızdır. -->
   <script src="./app.js"></script>
+
   <script>
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("./sw.js").catch(console.error);
+      navigator.serviceWorker.register("./sw.js").catch(() => {});
     }
   </script>
 </body>
