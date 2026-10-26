@@ -1,0 +1,14 @@
+
+{
+  "id": "./",
+  "name": "WTMUG Yoklama Sistemi",
+  "short_name": "Yoklama",
+  "description": "Ses kodu ve QR kod ile haftalık yoklama",
+  "lang": "tr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f1f5f9",
+  "theme_color": "#14213d"
+}

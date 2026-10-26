@@ -1,0 +1,23 @@
+
+[
+  {
+    "id": "BLM101",
+    "name": "Programlamaya Giriş",
+    "students": ["2024001", "2024002", "2024003"]
+  },
+  {
+    "id": "BLM202",
+    "name": "Veri Yapıları",
+    "students": ["2024001", "2024002", "2024005"]
+  },
+  {
+    "id": "YAZ301",
+    "name": "Web Programlama",
+    "students": ["2024001", "2024003", "2024004", "2024005"]
+  },
+  {
+    "id": "EEE204",
+    "name": "Devre Analizi",
+    "students": ["2024004", "2024005"]
+  }
+]

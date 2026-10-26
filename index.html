@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#14213d">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <title>WTMUG Yoklama Sistemi</title>
+</head>
+<body>
+  <header>
+    <h1>WTMUG Yoklama Sistemi</h1>
+    <p>Üniversite haftalık yoklama uygulaması</p>
+  </header>
+  <main>
+    <section class="card">
+      <h2>Uygulamayı seçin</h2>
+      <a class="big-link" href="lecturer.html">Hoca Uygulaması</a>
+      <a class="big-link" href="student.html">Öğrenci Uygulaması</a>
+      <a class="big-link" href="report.html">Yoklama Raporları</a>
+    </section>
+  </main>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js").catch(console.error);
+    }
+  </script>
+</body>
+</html>

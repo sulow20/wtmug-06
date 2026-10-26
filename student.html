@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#14213d">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <title>Öğrenci Yoklama</title>
+</head>
+<body data-page="student">
+  <header>
+    <h1>Öğrenci Yoklama</h1>
+    <nav>
+      <a href="lecturer.html">Hoca</a>
+      <a href="student.html">Öğrenci</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Öğrenci numarası</h2>
+      <label for="studentId">Numaranız</label>
+      <input id="studentId" inputmode="numeric"
+             maxlength="20" placeholder="2024001">
+      <button id="startListening">Mikrofonu başlat</button>
+      <button id="stopListening" class="secondary" disabled>
+        Dinlemeyi durdur
+      </button>
+      <p id="listenStatus" role="status">Mikrofon kapalı.</p>
+    </section>
+
+    <section class="card">
+      <h2>Algılanan ses kodu</h2>
+      <div id="studentCode" class="code">----</div>
+      <p id="codeStatus">Dört haneli kod bekleniyor.</p>
+    </section>
+
+    <section class="card">
+      <h2>Manuel kod girişi</h2>
+      <label for="manualCode">Hocanın ekranındaki kod</label>
+      <input id="manualCode" inputmode="numeric"
+             maxlength="4" placeholder="0000">
+      <button id="submitManual">QR kodunu oluştur</button>
+    </section>
+
+    <section class="card">
+      <h2>Yoklama QR kodunuz</h2>
+      <div id="qr"></div>
+      <p>QR kodunuzu hocanın kamerasına gösterin.</p>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js").catch(console.error);
+    }
+  </script>
+</body>
+</html>

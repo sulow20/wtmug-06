@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#14213d">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <title>Hoca Yoklama</title>
+</head>
+<body data-page="teacher">
+  <header>
+    <h1>Hoca Yoklama Sistemi</h1>
+    <nav>
+      <a href="lecturer.html">Hoca</a>
+      <a href="student.html">Öğrenci</a>
+      <a href="report.html">Raporlar</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Ders ve hafta seçimi</h2>
+      <label for="course">Ders</label>
+      <select id="course"></select>
+      <label for="week">Hafta</label>
+      <select id="week"></select>
+    </section>
+
+    <section class="card">
+      <h2>Sesli kod yayını</h2>
+      <div id="liveCode" class="code">----</div>
+      <p id="broadcastStatus" role="status">Yayın başlatılmadı.</p>
+      <label class="check">
+        <input type="checkbox" id="autoCamera" checked>
+        Yayın başlarken kamerayı otomatik aç
+      </label>
+      <button id="startBroadcast">Yayını başlat</button>
+      <button id="stopBroadcast" class="secondary" disabled>
+        Yayını durdur
+      </button>
+      <button id="cameraToggle" class="secondary">Kamerayı aç</button>
+    </section>
+
+    <section class="card">
+      <h2>QR kod okuyucu</h2>
+      <video id="camera" autoplay playsinline muted></video>
+      <p id="scanStatus">Kamera kapalı.</p>
+      <p id="attendanceMessage" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="card">
+      <h2>Okutulan öğrenci</h2>
+      <div id="studentInfo">Henüz öğrenci okutulmadı.</div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js").catch(console.error);
+    }
+  </script>
+</body>
+</html>
