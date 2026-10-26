@@ -1,7 +1,7 @@
 
 "use strict";
 
-const CACHE_NAME = "wtmug-yoklama-v1";
+const CACHE_NAME = "wtmug-yoklama-v3";
 
 const FILES = [
   "./",
@@ -43,7 +43,6 @@ self.addEventListener("fetch", event => {
 
   const url = new URL(request.url);
 
-  // Yalnızca bu GitHub Pages projesinin dosyalarını önbelleğe al.
   if (url.origin !== self.location.origin) return;
 
   event.respondWith(
